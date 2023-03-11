@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, PlatformColor } from "react-native";
-import { Button, Surface, Text } from "react-native-paper";
+import { Button } from "react-native-paper";
 
 export default function Home({ navigation }: any) {
   const styles = StyleSheet.create({
@@ -10,17 +10,6 @@ export default function Home({ navigation }: any) {
       backgroundColor: PlatformColor("@android:color/system_accent1_300"),
       alignItems: "center",
       justifyContent: "center",
-    },
-    surface: {
-      padding: 8,
-      height: 80,
-      width: 80,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: PlatformColor("@android:color/system_accent1_600"),
-    },
-    text: {
-      color: "white",
     },
   });
 
@@ -34,9 +23,6 @@ export default function Home({ navigation }: any) {
       >
         Start
       </Button>
-      <Surface elevation={1} style={styles.surface}>
-        <Text style={styles.text}>1</Text>
-      </Surface>
     </View>
   );
 }

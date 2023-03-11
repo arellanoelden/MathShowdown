@@ -1,12 +1,20 @@
+import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import {
   View,
   StyleSheet,
   PlatformColor,
-  FlatList,
   TouchableOpacity,
 } from "react-native";
-import { Card, Surface, Text, TouchableRipple } from "react-native-paper";
+import {
+  Divider,
+  MD3Colors,
+  ProgressBar,
+  Surface,
+  Switch,
+  Text,
+} from "react-native-paper";
+import { generateRandomEquationWithOptions } from "../utils";
 
 export default function Equation() {
   const styles = StyleSheet.create({
@@ -32,23 +40,32 @@ export default function Equation() {
       height: "40%",
       margin: 10,
     },
-    optionCard: {
+    equationSurface: {
+      justifyContent: "center",
+      alignItems: "center",
+      width: "90%",
+      height: "15%",
+      backgroundColor: PlatformColor("@android:color/system_accent1_500"),
+      borderColor: "black",
+      borderRadius: 10,
+    },
+    surface: {
       justifyContent: "center",
       alignItems: "center",
       flex: 1,
       width: "100%",
       backgroundColor: PlatformColor("@android:color/system_accent1_500"),
       borderColor: "black",
+      borderRadius: 10,
+    },
+    horizontalRule: {
+      height: 5,
+      width: "100%",
+      backgroundColor: PlatformColor("@android:color/system_accent1_500"),
     },
   });
 
-  const equation = "5 + 5";
-  const options = [
-    { value: 1, isCorrect: false },
-    { value: 3, isCorrect: false },
-    { value: 10, isCorrect: true },
-    { value: 5, isCorrect: false },
-  ];
+  const { equation, options } = generateRandomEquationWithOptions();
 
   const checkValue = (option: any) => {
     console.log(option.isCorrect);
@@ -56,7 +73,12 @@ export default function Equation() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{equation}</Text>
+      <Surface elevation={3} style={styles.equationSurface}>
+        <Text style={styles.text} variant="displayLarge">
+          {equation}
+        </Text>
+      </Surface>
+      <Divider bold={true} style={styles.horizontalRule} />
       <View style={styles.optionsContainer}>
         {options.map((option) => {
           return (
@@ -66,17 +88,11 @@ export default function Equation() {
               style={styles.optionRipple}
               activeOpacity={1}
             >
-              <Card
-                mode="elevated"
-                elevation={5}
-                onPress={() => checkValue(option)}
-                style={styles.optionCard}
-                key={option.value}
-              >
-                <Text style={styles.text} variant="titleLarge">
+              <Surface elevation={3} style={styles.surface}>
+                <Text style={styles.text} variant="displayMedium">
                   {option.value}
                 </Text>
-              </Card>
+              </Surface>
             </TouchableOpacity>
           );
         })}
